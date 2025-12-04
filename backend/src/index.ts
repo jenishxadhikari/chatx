@@ -1,8 +1,11 @@
 import { app } from '@/app'
 import { env } from '@/config/env'
+import { connectDB } from '@/db'
 
 ;(async function () {
   try {
+    connectDB()
+
     app.listen(env.PORT, () => {
       console.log(`Server running at port: ${env.PORT}`)
     })

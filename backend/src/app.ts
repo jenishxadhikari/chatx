@@ -4,9 +4,11 @@ import helmet from 'helmet'
 import compression from 'compression'
 import cors from 'cors'
 
-import type { Request, Response } from 'express'
+import type { Request, Response, NextFunction } from 'express'
 
 import { corsOptions } from '@/lib/cors'
+import { ApiError, CustomError } from './lib/api-error'
+import { HealthRouter } from './features/health/health.route'
 
 const app = express()
 
@@ -17,10 +19,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(compression())
 
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({
-    message: 'Hello World'
-  })
+app.use('/api/v1', HealthRouter)
+
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log(error)
+  if (error instanceof ApiError) {
+    return ApiError.handle(error, res)
+  }
+  return ApiError.handle(new CustomError.InternalServerError(), res)
 })
 
 export { app }
