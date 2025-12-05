@@ -17,4 +17,4 @@ router.route('/users')
     UserController.updateProfile
   )
 
-export { router as UserRoute }
+export { router as UserRouter }
