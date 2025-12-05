@@ -7,8 +7,10 @@ import cors from 'cors'
 import type { Request, Response, NextFunction } from 'express'
 
 import { corsOptions } from '@/lib/cors'
-import { ApiError, CustomError } from './lib/api-error'
-import { HealthRouter } from './features/health/health.route'
+import { ApiError, CustomError } from '@/lib/api-error'
+
+import { HealthRouter } from '@/features/health/health.route'
+import { AuthRouter } from '@/features/auth/auth.route'
 
 const app = express()
 
@@ -20,6 +22,8 @@ app.use(cookieParser())
 app.use(compression())
 
 app.use('/api/v1', HealthRouter)
+
+app.use('/api/v1', AuthRouter)
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   console.log(error)
