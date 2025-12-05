@@ -9,6 +9,14 @@ const safeUserSchema = z.object({
   updatedAt: z.date({ error: 'Updated At is required.' })
 })
 
+const safeUsersSchema = z.array(safeUserSchema)
+
+const updateUserSchema = z.object({
+  avatar: z.string({ error: 'Avatar is required.' }).nonempty(),
+})
+
 export const UserSchema = {
-  safeUserSchema
+  safeUserSchema,
+  safeUsersSchema,
+  updateUserSchema
 }
