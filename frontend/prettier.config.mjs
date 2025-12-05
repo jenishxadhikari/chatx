@@ -39,7 +39,7 @@ const config = {
 
     // 6. Hooks
     '^@/hooks(/.*)?$',
-
+    '^@/context(/.*)?$',
     '',
 
     // 7. UI & Presentation Layer
@@ -51,7 +51,9 @@ const config = {
 
     // 8. Feature-Specific & App Level
     '^@/features(/.*)?$',
+    '^@/pages(/.*)?$',
     '^@/app(/.*)?$',
+    '^@/routes(/.*)?$',
 
     '',
     // 9. Relative Imports

@@ -1,0 +1,20 @@
+import { useAuthContext } from '@/context/auth-provider'
+
+import { Logout } from '@/features/auth/components/logout-button'
+
+export default function Home() {
+  const { session, isAuthenticated } = useAuthContext()
+  return (
+    <section className="space-y-4 p-10">
+      <h1>ChatX</h1>
+      {
+        isAuthenticated && (
+          <div className='space-y-4'>
+            <p>{JSON.stringify(session)}</p>
+            <Logout />
+          </div>
+        )
+      }
+    </section>
+  )
+}
