@@ -26,6 +26,21 @@ const getUsers = asyncHandler(async (req: Request, res: Response) => {
 })
 
 /*
+    GET /api/v1/users/:id - Get User
+*/
+const getUser = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const user = await UserQueries.getUserById(id)
+
+  return res.status(StatusCodes.OK).json({
+    data: {
+      ...user
+    },
+    message: 'User fetched successfully.'
+  })
+})
+
+/*
     PATCH /api/v1/users - Update Profile
 */
 const updateProfile = asyncHandler(async (req: Request, res: Response) => {
@@ -54,5 +69,6 @@ const updateProfile = asyncHandler(async (req: Request, res: Response) => {
 
 export const UserController = {
   getUsers,
+  getUser,
   updateProfile
 }

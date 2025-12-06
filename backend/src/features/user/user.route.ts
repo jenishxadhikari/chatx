@@ -8,6 +8,7 @@ import { UserController } from './user.controller'
 const router = Router()
 
 router.route('/users').get(authentication, UserController.getUsers)
+router.route('/users/:id').get(authentication, UserController.getUser)
 
 router.route('/users')
   .patch(
