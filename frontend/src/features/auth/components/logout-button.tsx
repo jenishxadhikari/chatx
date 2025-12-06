@@ -6,6 +6,8 @@ import { toast } from 'sonner'
 
 import { logoutMutation } from '@/lib/api'
 
+import { socket } from '@/hooks/use-socket'
+
 import { Button } from '@/components/ui/button'
 
 export function Logout() {
@@ -16,6 +18,7 @@ export function Logout() {
     mutationFn: logoutMutation,
     onSuccess: (response) => {
       toast.success(response.data.message)
+      socket.disconnect()
       localStorage.removeItem('accessToken')
       queryClient.resetQueries({ queryKey: ['auth'] })
       navigate('/')
@@ -35,9 +38,9 @@ export function Logout() {
 
   return (
     <Button
-      variant="destructive"
+      variant="ghost"
       size="sm"
-      className="w-fit"
+      className="w-full justify-start"
       disabled={isPending}
       onClick={handleLogout}
     >

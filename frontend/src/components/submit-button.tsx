@@ -1,5 +1,7 @@
 import { LoaderCircle } from 'lucide-react'
 
+import { cn } from '@/lib/utils'
+
 import { Button } from '@/components/ui/button'
 
 interface SubmitButtonProps {
@@ -8,9 +10,9 @@ interface SubmitButtonProps {
   className?: string
 }
 
-export function SubmitButton({ pending, label, className = 'w-full' }: SubmitButtonProps) {
+export function SubmitButton({ pending, label, className }: SubmitButtonProps) {
   return (
-    <Button type="submit" className={className} disabled={pending}>
+    <Button type="submit" className={cn('w-full', className)} disabled={pending}>
       {pending && <LoaderCircle className="size-4 animate-spin" />} {label}
     </Button>
   )

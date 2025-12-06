@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRoot } from 'react-dom/client'
 
 import { Toaster } from '@/components/ui/sonner.tsx'
@@ -19,9 +18,8 @@ createRoot(document.getElementById('root')!).render(
       <QueryProvider>
         <AuthProvider>
           <App />
-          <Toaster />
+          <Toaster position="top-center" />
         </AuthProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryProvider>
     </ThemeProvider>
   </StrictMode>

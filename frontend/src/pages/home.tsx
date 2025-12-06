@@ -7,7 +7,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { MaxWidthWrapper } from '@/components/max-width-wrapper'
 
-export default function LandingPage() {
+export default function Home() {
   return (
     <div className="space-y-8 py-10 md:space-y-14 md:py-12">
       {/* Hero Section */}

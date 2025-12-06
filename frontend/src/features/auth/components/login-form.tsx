@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { Eye, EyeOff } from 'lucide-react'
 import { Controller, useForm } from 'react-hook-form'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -24,9 +24,6 @@ import { AuthWrapper } from './auth-wrapper'
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const redirectTo = searchParams.get('redirectTo') ?? '/'
-
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -53,7 +50,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
         localStorage.setItem('accessToken', response.data.accessToken)
         queryClient.resetQueries({ queryKey: ['auth'] })
         form.reset()
-        navigate(redirectTo)
+        navigate('/chat')
       },
       onError: (error) => {
         if (error instanceof AxiosError) {
@@ -136,6 +133,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
       <FieldDescription className="px-6 text-center">
         By clicking continue, you agree to our <Link to="#">Terms of Service</Link> and{' '}
         <Link to="#">Privacy Policy</Link>.
+        <p className="mt-2">
+          Test Account Email : jenishadh@gmail.com | Password : testpassword123!
+        </p>
       </FieldDescription>
     </div>
   )

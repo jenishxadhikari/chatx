@@ -27,7 +27,7 @@ API.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
       try {
-        const refreshResponse = await APIRefresh.get('/v1/auth/refresh')
+        const refreshResponse = await APIRefresh.get('/api/v1/auth/refresh')
         const accessToken = refreshResponse.data.accessToken
         localStorage.setItem('accessToken', accessToken)
 

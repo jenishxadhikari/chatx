@@ -1,5 +1,6 @@
 import { useAuthContext } from '@/context/auth-provider'
 
+import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Header } from '@/components/header'
 
 import { AccountInfoCard } from '@/features/settings/components/account-info-card'
@@ -12,6 +13,7 @@ export default function Settings() {
   }
   return (
     <div className="flex-1 space-y-6 p-4">
+      <SidebarTrigger />
       <Header title="Settings" description="Manage your account and preferences" />
       <section className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <AccountInfoCard

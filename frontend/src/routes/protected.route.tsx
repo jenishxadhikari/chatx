@@ -1,10 +1,13 @@
 import { Loader } from 'lucide-react'
 import { Navigate, Outlet } from 'react-router-dom'
 
+import { socket } from '@/hooks/use-socket'
 import { useAuthContext } from '@/context/auth-provider'
 
 export default function ProtectedRoute() {
-  const { isAuthenticated, isLoading } = useAuthContext()
+  const { isAuthenticated, session, isLoading } = useAuthContext()
+  socket.connect()
+  socket.auth = { userId: session?.user.id }
 
   if (isLoading) {
     return (
