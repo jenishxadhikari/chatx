@@ -12,6 +12,7 @@ import { ApiError, CustomError } from '@/lib/api-error'
 import { HealthRouter } from '@/features/health/health.route'
 import { AuthRouter } from '@/features/auth/auth.route'
 import { UserRouter } from '@/features/user/user.route'
+import { MessageRouter } from '@/features/message/message.route'
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use('/api/v1', HealthRouter)
 
 app.use('/api/v1', AuthRouter)
 app.use('/api/v1', UserRouter)
+app.use('/api/v1', MessageRouter)
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   console.log(error)
