@@ -21,6 +21,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(compression())
+app.use(express.static('public'))
 
 app.use('/api/v1', HealthRouter)
 

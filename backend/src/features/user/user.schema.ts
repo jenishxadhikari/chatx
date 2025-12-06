@@ -11,12 +11,7 @@ const safeUserSchema = z.object({
 
 const safeUsersSchema = z.array(safeUserSchema)
 
-const updateUserSchema = z.object({
-  avatar: z.string({ error: 'Avatar is required.' }).nonempty(),
-})
-
 export const UserSchema = {
   safeUserSchema,
-  safeUsersSchema,
-  updateUserSchema
+  safeUsersSchema
 }

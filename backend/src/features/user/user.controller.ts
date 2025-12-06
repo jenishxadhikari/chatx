@@ -1,14 +1,14 @@
-import z from 'zod'
+import fs from 'fs'
 import { Types } from 'mongoose'
 
 import type { Request, Response } from 'express'
 
 import { cloudinary } from '@/lib/cloudinary'
 import { asyncHandler } from '@/lib/async-handler'
+import { CustomError } from '@/lib/api-error'
 import { StatusCodes } from '@/config/http-status-codes'
 
 import { UserQueries } from './user.queries'
-import { UserSchema } from './user.schema'
 
 /*
     GET /api/v1/users - Get Users
@@ -25,12 +25,21 @@ const getUsers = asyncHandler(async (req: Request, res: Response) => {
   })
 })
 
+/*
+    PATCH /api/v1/users - Update Profile
+*/
 const updateProfile = asyncHandler(async (req: Request, res: Response) => {
   const user = req.user
-  const { avatar }: z.infer<typeof UserSchema.updateUserSchema> = req.body
+  const avatar = req.file
+  if (!avatar) {
+    throw new CustomError.BadRequestError('Avatar file is missing.')
+  }
+  const avatarPath = avatar.path
 
-  const uploadAvatar = await cloudinary.uploader.upload(avatar)
-  const updatedUser = await UserQueries.updateUser({
+  const uploadAvatar = await cloudinary.uploader.upload(avatarPath)
+  fs.unlinkSync(avatar.path)
+
+  const updatedUser = await UserQueries.updateProfile({
     id: new Types.ObjectId(user.id),
     avatar: uploadAvatar.secure_url
   })
@@ -39,7 +48,7 @@ const updateProfile = asyncHandler(async (req: Request, res: Response) => {
     data: {
       ...updatedUser
     },
-    message: 'Users fetched successfully.'
+    message: 'Profile updated successfully.'
   })
 })
 

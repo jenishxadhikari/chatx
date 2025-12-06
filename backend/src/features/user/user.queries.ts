@@ -33,12 +33,12 @@ async function createUser({ name, email, password }: CreateUser) {
   return UserSchema.safeUserSchema.parse(user)
 }
 
-type UpdateUser = {
+type UpdateProfile = {
   id: Types.ObjectId,
   avatar: string
 }
 
-async function updateUser({ id, avatar }: UpdateUser) {
+async function updateProfile({ id, avatar }: UpdateProfile) {
   const user = await User.findByIdAndUpdate(id, {
     avatar
   }, { new: true })
@@ -49,6 +49,6 @@ export const UserQueries = {
   getUserByEmail,
   getUserById,
   createUser,
-  updateUser,
+  updateProfile,
   getUsersForSidebar
 }
