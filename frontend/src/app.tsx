@@ -6,10 +6,10 @@ import { NotFound } from '@/components/not-found'
 import Login from '@/pages/auth/login'
 import Register from '@/pages/auth/register'
 import Home from '@/pages/home'
+import Chat from '@/pages/protected/chat'
+import Settings from '@/pages/protected/settings'
 import ProtectedRoute from '@/routes/protected.route'
 import PublicRoute from '@/routes/public.route'
-
-import Chat from './pages/protected/chat'
 
 export default function App() {
   return (
@@ -17,6 +17,7 @@ export default function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route element={<Chat />} path="chat" />
+          <Route element={<Settings />} path="settings" />
         </Route>
 
         <Route element={<Main />}>

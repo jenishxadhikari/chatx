@@ -5,7 +5,7 @@ import type { loginSchema, registerSchema } from '@/features/auth/schema'
 import { API } from './axios'
 
 /*
-  Auth Endpoints
+  Auth API Endpoints
 */
 
 /*
@@ -34,4 +34,11 @@ export async function logoutMutation() {
 */
 export function sessionQuery() {
   return API.get('/v1/auth/session')
+}
+
+/*
+  User API Endpoints
+*/
+export async function updateProfileMutation(data: FormData) {
+  return await API.patch('/v1/users', data)
 }

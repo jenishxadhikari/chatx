@@ -10,8 +10,7 @@ type Session = {
     id: string
     name: string
     email: string
-    isVerified: boolean
-    is2FAEnabled: boolean
+    avatar: string
     createdAt: Date
     expiredAt: Date
   }
